@@ -12,7 +12,7 @@ DESC
 s.homepage         = 'https://www.built.io/products/contentstack/overview'
 s.license          = { :type => 'Commercial',:text => 'See https://www.built.io/'}
 s.author           = { 'Built.io' => 'support@contentstack.io' }
-s.source           = { :git => 'https://github.com/raweng/BuiltIOContentstack-iOS', :tag => s.version.to_s }
+s.source           = { :git => 'https://github.com/raweng/BuiltIOContentstack-iOS.git', :tag => s.version.to_s }
 s.social_media_url = 'https://twitter.com/builtio'
 
 s.ios.deployment_target = '7.0'
