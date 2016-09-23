@@ -1,0 +1,18 @@
+
+Version: 1.0.1
+Date: Sept-22-2016
+
+Bug Fixes:
+	*Entry
+	 - Fixed fetch method which now return response as per environment.
+
+	*Query
+	 - Fixed search method issue causing improper result.
+
+====================================================================================
+
+Version: 1.0.0
+Date: Feb-11-2016
+
+Changes:
+	- Introduce ContentStack SDK for iOS.
