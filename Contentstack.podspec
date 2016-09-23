@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 s.name             = 'Contentstack'
 s.version          = '1.0.1'
-s.summary          = 'Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.'
+s.summary          = 'Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre.'
 
 s.description      = <<-DESC
 Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content. 
