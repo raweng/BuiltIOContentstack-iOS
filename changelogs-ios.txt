@@ -1,3 +1,45 @@
+Version: 3.0.0
+Date: Oct-19-2016
+
+New Features:
+	*Config
+		- Added New Class
+
+	*Assets
+		- Added New Class
+
+	*AssetLibrary
+		- Added New Class
+
+	*Contentstack
+	 - added method 'stackWithAPIKey:accessToken:environmentName:config:'
+
+	*Entry
+	 - added property 'publishDetails'
+
+	*Stack
+	 - added readonly property 'config'
+	 - added method 'asset'
+	 - added method 'assetWithUID:'
+	 - added method 'assetLibrary'
+	 
+
+API deprecation:
+	*Contentstack
+	 - removed method 'stackWithAPIKey:accessToken:environmentUID:'
+
+	*Entry
+	 - removed property 'metadata'
+
+	*Stack
+	 - removed property 'isEnvironmentUID'
+	 - removed method 'setEnvironment:isEnvironmentUID:'
+
+	*Query
+	 - removed method 'afterUID:'
+	 - removed method 'beforeUID:'
+
+====================================================================================
 
 Version: 1.0.1
 Date: Sept-22-2016

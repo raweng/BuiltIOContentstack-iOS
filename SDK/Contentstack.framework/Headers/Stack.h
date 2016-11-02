@@ -9,11 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "ContentstackDefinitions.h"
 
+@class Config;
 @class ContentType;
+@class AssetLibrary;
+@class Assets;
 
 BUILT_ASSUME_NONNULL_BEGIN
 
 @interface Stack : NSObject
+/**----------------------------------------------------------------------------------------
+ * @name Properties
+ *-----------------------------------------------------------------------------------------
+ */
 
 /**
  *  Readonly property to check value of apikey
@@ -21,7 +28,7 @@ BUILT_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *apiKey;
 
 /**
- *  Readonly property to check value of acess token
+ *  Readonly property to check value of access token
  */
 @property (nonatomic, copy, readonly) NSString *accessToken;
 
@@ -31,9 +38,9 @@ BUILT_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *environment;
 
 /**
- *  Readonly Boolean property to check if provided environment is "Environment UID" or "Environment Name"
+ *  Readonly property to check value of config provided
  */
-@property (nonatomic, assign, readonly) BOOL isEnvironmentUID;
+@property (nonatomic, copy, readonly) Config *config;
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
@@ -46,11 +53,11 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
  Gets the new instance of ContentType object with specified name.
 
-     //Obj-C
-     ContentType *contentTypeObj = [stack contentTypeWithName:@"blog"];
-     
-     //Swift
-     var contentTypeObj:ContentType = stack.contentTypeWithName("blog")
+    //Obj-C
+    ContentType *contentTypeObj = [stack contentTypeWithName:@"blog"];
+
+    //Swift
+    var contentTypeObj:ContentType = stack.contentTypeWithName("blog")
 
  @param contentTypeName name of the contentType to perform action.
  @return instance of ContentType.
@@ -66,11 +73,11 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
  Set a header for Stack
  
-     //Obj-C
-     [stack setHeader:@"MyValue" forKey:@"My-Custom-Header"];
-     
-     //Swift
-     stack.setHeader("MyValue", forKey: "My-Custom-Header")
+    //Obj-C
+    [stack setHeader:@"MyValue" forKey:@"My-Custom-Header"];
+
+    //Swift
+    stack.setHeader("MyValue", forKey: "My-Custom-Header")
  
  @param headerValue  The header key
  @param headerKey    The header value
@@ -80,11 +87,11 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
  Set a header for Stack
  
-     //Obj-C
-     [stack addHeadersWithDictionary:@{@"My-Custom-Header": @"MyValue"}];
-     
-     //Swift
-     stack.addHeadersWithDictionary(["My-Custom-Header":"MyValue"])
+    //Obj-C
+    [stack addHeadersWithDictionary:@{@"My-Custom-Header": @"MyValue"}];
+
+    //Swift
+    stack.addHeadersWithDictionary(["My-Custom-Header":"MyValue"])
  
  @param headers The headers as dictionary which needs to be added to the application
  */
@@ -103,26 +110,98 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (void)removeHeaderForKey:(NSString *)headerKey;
 
-//MARK: Modify Environment -
+/**----------------------------------------------------------------------------------------
+ * @name Last Activity
+ *-----------------------------------------------------------------------------------------
+ */
+
+/**
+ fetch last activity of content type
+ 
+     //Obj-C
+      [stack fetchLastActivity:^(ResponseType responseType, NSDictionary *lastActivity, NSError *error) {
+        //lastActivity
+     }];
+     
+     //Swift
+     stack.fetchLastActivity { (responseType, lastActivity!, error!) -> Void in
+        //lastActivity
+     }
+
+ 
+ @param headers The headers as dictionary which needs to be added to the application
+ */
+- (void)fetchLastActivity:(void (^)(ResponseType responseType, NSDictionary *lastActivity, NSError *error))completionBlock;
+
+/**----------------------------------------------------------------------------------------
+ * @name Fetch Schema
+ *-----------------------------------------------------------------------------------------
+ */
+/**
+ Gets the schema of content types
+  
+ //Obj-C
+ [stack fetchSchema:^(ResponseType responseType, NSArray *schema, NSError *error) {
+ 
+ }];
+ 
+ //Swift
+ stack.fetchSchema { (responseType, schema, error) -> Void in
+ 
+ }
+ 
+ @param completionBlock Completion block with params (ResponseType responseType, NSArray *schema, NSError *error)
+ */
+- (void)fetchSchema:(void (^)(ResponseType responseType, NSArray * BUILT_NULLABLE_P schema, NSError * BUILT_NULLABLE_P error))completionBlock;
+
+//MARK: Assets -
 /**---------------------------------------------------------------------------------------
- * @name Modify Environment
+ * @name Assets
  *  ---------------------------------------------------------------------------------------
  */
 
 /**
-Sets environment for the Stack.
-
+ Represents a Asset on 'Stack' which can be executed to get AssetLibrary object
+ 
      //Obj-C
-     [stack setEnvironment:@"dummy" isEnvironmentUID:YES];
+     AssetLibrary *assetLib = [stack assetLibrary];
      
      //Swift
-     stack.setEnvironment("dummy", isEnvironmentUID:true)
-
+     var assetLib: AssetLibrary = stack.assetLibrary()
  
- @param environment name/uid of environment
- @param isUID       Bool if true will consider environment string as 'Environment UID' instead of 'Environment Name'.
+ @return Returns new AssetLibrary instance
  */
-- (void)setEnvironment:(NSString *)environment isEnvironmentUID:(BOOL)isUID;
+
+-(AssetLibrary*)assetLibrary;
+
+/**
+ Represents a Asset on 'Stack' which can be executed to get Asset object
+ 
+     //Obj-C
+     Assets *assetObj = [stack assets];
+     
+     //Swift
+     var assetObj:Assets = stack.assets()
+ 
+ @return Returns new Asset instance
+ */
+
+-(Assets*)asset;
+
+/**
+ Gets the new instance of Asset object with specified UID.
+ 
+     //Obj-C
+     Assets *assetObj = [contentTypeObj assetWithUID:@"bltf4fsamplec851db"];
+     
+     //Swift
+     var assetObj:Assets = contentTypeObj.assetWithUID("bltf4fsamplec851db")
+ 
+ @param uid uid of the Asset object to fetch.
+ @return new instance of Asset with uid.
+ */
+- (Assets *)assetWithUID:(NSString *)uid;
+
 
 @end
 

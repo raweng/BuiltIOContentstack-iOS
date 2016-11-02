@@ -9,14 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "ContentstackDefinitions.h"
 
+@class Assets;
+
 BUILT_ASSUME_NONNULL_BEGIN
 
 @interface Entry : NSObject
-
+/**----------------------------------------------------------------------------------------
+ * @name Properties
+ *-----------------------------------------------------------------------------------------
+ */
 /**
  *  Readonly property to check value of entry's uid
  */
 @property (nonatomic, copy, readonly) NSString *uid;
+
+/**
+ *  Readonly property to check if entry is deleted
+ */
+@property (nonatomic, assign, readonly, getter=isDeleted) BOOL deleted;
 
 /**
  *  Readonly property to check tags of entry
@@ -74,14 +84,19 @@ BUILT_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *deletedBy;
 
 /**
- *  Readonly property to check metadata of entry.
+ *  Readonly property to check publish details of entry.
  */
-@property (nonatomic, copy, readonly) NSDictionary *metadata;
+@property (nonatomic, copy, readonly) NSArray *publishDetails;
 
 /**
  *  property to assign cache policy like CACHE_THEN_NETWORK, NETWORK_ELSE_CACHE, NETWORK_ONLY, etc.
  */
 @property (nonatomic, assign) CachePolicy cachePolicy;
+
+/**
+ *  Readonly property to get data of entry.
+ */
+@property (nonatomic, copy, readonly) NSDictionary *properties;
 
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
@@ -196,6 +211,41 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)hasKey:(NSString *)key;
 
+//MARK: - Assets -
+/**
+ Get the info of the specified key of Assets object and returns instance of Assets.
+ 
+ // 'projectImage' is a key in project class for asset
+ 
+ //Obj-C
+ Assets *asset = [projectObject assetForKey:@"projectImage"];
+ 
+ //Swift
+ var asset:Assets =  projectObject.assetForKey("projectImage")
+ 
+ 
+ @param key Key containing the reference value of Asset
+ @return Instance of Assets.
+ */
+- (Assets *)assetForKey:(NSString *)key;
+
+/**
+ Get the array containing instance of Assets mentioned in key specified.
+ 
+ // 'projectImage' is a key in project class for asset
+ 
+ //Obj-C
+ NSArray *assetArray = [projectObject assetsForKey:@"projectImage"];
+ 
+ //Swift
+ var assetArray = projectObject.assetsForKey("projectImage")
+ 
+ @param key Key containing the colection reference value of Assets.
+ @return Array containing instance of Assets.
+ */
+- (NSArray *)assetsForKey:(NSString *)key;
+
+
 //MARK: - HTML String from Markdown -
 /**---------------------------------------------------------------------------------------
  * @name HTML String from Markdown
@@ -219,7 +269,6 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (BUILT_NULLABLE NSString *)HTMLStringForMarkdownKey:(NSString *)key;
 
-
 /**
  Converts Markdown to Array of HTML String for specified key
  
@@ -235,7 +284,6 @@ BUILT_ASSUME_NONNULL_BEGIN
  @return HTML Array from Markdown
  */
 - (BUILT_NULLABLE NSArray *)HTMLArrayForMarkdownKey:(NSString *)key;
-
 
 //MARK: - Only and Except -
 /**---------------------------------------------------------------------------------------
@@ -335,7 +383,7 @@ Specifies an array of keys in reference class object that would be 'excluded' fr
      ContentType *contentTypeObj = [stack contentTypeWithName:@"blog"];
      //'bltf4fsamplec851db' is uid of an entry of 'blog' contenttype
      Entry *entryObj  = [contentTypeObj entryWithUID:@"bltf4fsamplec851db"];
-     [entryObj fetch:^(NSError *error) {
+     [entryObj fetch:^(ResponseType type, NSError *error) {
         //error if exists then use 'error' object for details
      }];
      
@@ -351,7 +399,7 @@ Specifies an array of keys in reference class object that would be 'excluded' fr
  
  @param callback Completion block with params NSError
  */
-- (void)fetch:(void(^)(NSError *error))callback;
+- (void)fetch:(void(^)(ResponseType type, NSError *error))callback;
 
 //MARK: - Cancel Request -
 /**---------------------------------------------------------------------------------------

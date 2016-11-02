@@ -17,7 +17,10 @@ BUILT_ASSUME_NONNULL_BEGIN
 @interface Query : NSObject
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
-
+/**----------------------------------------------------------------------------------------
+ * @name Properties
+ *-----------------------------------------------------------------------------------------
+ */
 /**
  *  property to assign cache policy like CACHE_THEN_NETWORK, NETWORK_ELSE_CACHE, NETWORK_ONLY, etc.
  */

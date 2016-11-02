@@ -57,6 +57,11 @@
     #  define BUILT_ASSUME_NONNULL_END
     #endif
 
+    #if __has_include(<Realm/Realm.h>)
+    #  define REALM_INCLUDED
+    #endif
+
+
     typedef NS_ENUM(NSUInteger, CachePolicy) {
         NETWORK_ONLY = 0,
         CACHE_ONLY,

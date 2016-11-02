@@ -11,7 +11,9 @@
 
 BUILT_ASSUME_NONNULL_BEGIN
 
+@class ContentType;
 @interface QueryResult : NSObject
+
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
@@ -37,6 +39,22 @@ BUILT_ASSUME_NONNULL_BEGIN
  @return Returns an array of entries returned by Query.
  */
 - (BUILT_NULLABLE NSArray *)getResult;
+/**
+ @abstract Gets the schema of objects returned by Query alongwith objects themselves.
+ 
+     //Obj-C
+     [projectQuery execInBackground:^(ResponseType type, QueryResult *result, NSError *error) {
+        NSArray *result = [result schema];
+     }];
+     
+     //Swift
+     projectQuery.execInBackground { (ResponseType, QueryResult!, NSError!) -> Void in
+        var schema:Array  =  QueryResult.schema()
+     }
+ 
+ @return Returns schemas.
+ */
+- (BUILT_NULLABLE NSArray *)schema;
 
 //MARK: Count -
 /**---------------------------------------------------------------------------------------
@@ -60,81 +78,6 @@ BUILT_ASSUME_NONNULL_BEGIN
  @return Returns the count of number of object returned by Query.
  */
 - (NSInteger)totalCount;
-
-//MARK: Delta Entries-
-/**---------------------------------------------------------------------------------------
- * @name Delta Entries
- *  ---------------------------------------------------------------------------------------
- */
-
-/**
- @abstract Get array of updated entries returned by delta.
- 
-     //Obj-C
-     [blogQuery execInBackground:^(ResponseType type, QueryResult *result, NSError *error) {
-        NSArray *updatedEntries = [result updatedEntries];
-     }];
-     
-     //Swift
-     blogQuery.execInBackground { (responseType, result!, error!) -> Void in
-        var updatedEntries:Array  =  result.updatedEntries()
-     }
- 
- @return Returns an array of updated entries returned by delta.
- */
-- (BUILT_NULLABLE NSArray *)updatedEntries;
-
-/**
- @abstract Get array of created entries returned by delta.
- 
-     //Obj-C
-     [blogQuery execInBackground:^(ResponseType type, QueryResult *result, NSError *error) {
-        NSArray *createdEntries = [result createdEntries];
-     }];
-     
-     //Swift
-     blogQuery.execInBackground { (responseType, result!, error!) -> Void in
-        var createdEntries:Array  =  result.createdEntries()
-     }
- 
- 
- @return Returns an array of created entries returned by delta.
- */
-- (BUILT_NULLABLE NSArray *)createdEntries;
-
-/**
- @abstract Get array of deleted entries returned by delta.
- 
-     //Obj-C
-     [blogQuery execInBackground:^(ResponseType type, QueryResult *result, NSError *error) {
-        NSArray *deletedEntries = [result deletedEntries];
-     }];
-     
-     //Swift
-     blogQuery.execInBackground { (responseType, result!, error!) -> Void in
-        var deletedEntries:Array  =  result.deletedEntries()
-     }
- 
- @return Returns an array of deleted entries returned by delta.
- */
-- (BUILT_NULLABLE NSArray *)deletedEntries;
-
-/**
- @abstract Get dictionary of all created/updated/deleted entries returned by delta.
- 
-     //Obj-C
-     [blogQuery execInBackground:^(ResponseType type, QueryResult *result, NSError *error) {
-        NSDictionary *allEntries = [result allEntries];
-     }];
-     
-     //Swift
-     blogQuery.execInBackground { (responseType, result!, error!) -> Void in
-        var allEntries:Dictionary  =  result.allEntries()
-     }
- 
- @return Returns an dictionary of created/updated/deleted entries returned by delta.
- */
-- (BUILT_NULLABLE NSDictionary *)allEntries;
 
 @end
 

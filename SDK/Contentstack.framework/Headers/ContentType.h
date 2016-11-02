@@ -11,6 +11,7 @@
 
 @class Entry;
 @class Query;
+@class Assets;
 
 BUILT_ASSUME_NONNULL_BEGIN
 
