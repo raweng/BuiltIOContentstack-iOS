@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ContentstackDefinitions.h"
 
-@class Assets;
+@class Asset;
+@class Group;
 
 BUILT_ASSUME_NONNULL_BEGIN
 
@@ -101,7 +102,7 @@ BUILT_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
-//MARK: Manually set headers -
+//MARK: - Manually set headers
 /**---------------------------------------------------------------------------------------
  * @name Manually set headers
  *  ---------------------------------------------------------------------------------------
@@ -113,12 +114,10 @@ BUILT_ASSUME_NONNULL_BEGIN
      //'blt5d4sample2633b' is a dummy Stack API key
      
      //Obj-C
-     Stack *stack = [Contentstack stackWithAPIKey:@"blt5d4sample2633b" accessToken:@"blt3esampletokeneb02" environmentName:@"dummy"];
-     [stack setHeader:@"MyValue" forKey:@"My-Custom-Header"];
+     [entryObj setHeader:@"MyValue" forKey:@"My-Custom-Header"];
      
      //Swift
-     var stack:Stack = Contentstack.stackWithAPIKey("blt5d4sample2633b", accessToken:"blt3esampletokeneb02", environmentName:@"dummy")
-     stack.setHeader("MyValue", forKey: "My-Custom-Header")
+     entryObj.setHeader("MyValue", forKey: "My-Custom-Header")
  
  @param headerValue  The header key
  @param headerKey    The header value
@@ -131,13 +130,10 @@ BUILT_ASSUME_NONNULL_BEGIN
      //'blt5d4sample2633b' is a dummy Stack API key
      
      //Obj-C
-     Stack *stack = [Contentstack stackWithAPIKey:@"blt5d4sample2633b" accessToken:@"blt3esampletokeneb02" environmentName:@"dummy"];
-     [stack addHeadersWithDictionary:@{@"My-Custom-Header": @"MyValue"}];
+     [entryObj addHeadersWithDictionary:@{@"My-Custom-Header": @"MyValue"}];
      
      //Swift
-     var stack:Stack = Contentstack.stackWithAPIKey("blt5d4sample2633b", accessToken:"blt3esampletokeneb02", environmentName:@"dummy")
-     stack.addHeadersWithDictionary(["My-Custom-Header":"MyValue"])
- 
+     entryObj.addHeadersWithDictionary(["My-Custom-Header":"MyValue"])
  
  @param headers  The headers as dictionary which needs to be added to the application
  */
@@ -149,18 +145,16 @@ BUILT_ASSUME_NONNULL_BEGIN
      //'blt5d4sample2633b' is a dummy Stack API key
  
      //Obj-C
-     Stack *stack = [Contentstack stackWithAPIKey:@"blt5d4sample2633b" accessToken:@"blt3esampletokeneb02" environmentName:@"dummy"];
-     [stack removeHeaderForKey:@"My-Custom-Header"];
+     [entryObj removeHeaderForKey:@"My-Custom-Header"];
      
      //Swift
-     var stack:Stack = Contentstack.stackWithAPIKey("blt5d4sample2633b", accessToken:"blt3esampletokeneb02", environmentName:@"dummy")
-     stack.removeHeaderForKey("My-Custom-Header")
+     entryObj.removeHeaderForKey("My-Custom-Header")
  
  @param headerKey    The header key that needs to be removed
  */
 - (void)removeHeaderForKey:(NSString *)headerKey;
 
-//MARK: Configuring manually -
+//MARK: - Configuring manually
 /**---------------------------------------------------------------------------------------
  * @name Configuring manually
  *  ---------------------------------------------------------------------------------------
@@ -179,7 +173,7 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (void)configureWithDictionary:(NSDictionary*)dictionary;
 
-//MARK: - Check for key existence -
+//MARK: - Check for key existence
 /**---------------------------------------------------------------------------------------
  * @name Check for key existence
  *  ---------------------------------------------------------------------------------------
@@ -211,42 +205,86 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)hasKey:(NSString *)key;
 
-//MARK: - Assets -
+//MARK: - Asset and AssetLibrary
+/**---------------------------------------------------------------------------------------
+ * @name Get Asset or AssetLibrary
+ *  ---------------------------------------------------------------------------------------
+ */
+
+
+//MARK: - Assets
 /**
- Get the info of the specified key of Assets object and returns instance of Assets.
+ Get the info of the specified key of Asset object and returns instance of Assets.
  
- // 'projectImage' is a key in project class for asset
+     // 'projectImage' is a key in project class for asset
  
- //Obj-C
- Assets *asset = [projectObject assetForKey:@"projectImage"];
+     //Obj-C
+         Asset *asset = [entryObj assetForKey:@"projectImage"];
  
- //Swift
- var asset:Assets =  projectObject.assetForKey("projectImage")
- 
+     //Swift
+     var asset:Asset =  entryObj.assetForKey("projectImage")
  
  @param key Key containing the reference value of Asset
- @return Instance of Assets.
+ @return Instance of Asset.
  */
-- (Assets *)assetForKey:(NSString *)key;
+- (Asset *)assetForKey:(NSString *)key;
 
 /**
  Get the array containing instance of Assets mentioned in key specified.
  
- // 'projectImage' is a key in project class for asset
+     //'projectImage' is a key in project class for asset
  
- //Obj-C
- NSArray *assetArray = [projectObject assetsForKey:@"projectImage"];
+     //Obj-C
+     NSArray *assetArray = [entryObj assetsForKey:@"projectImage"];
  
- //Swift
- var assetArray = projectObject.assetsForKey("projectImage")
+     //Swift
+     var assetArray = entryObj.assetsForKey("projectImage")
  
  @param key Key containing the colection reference value of Assets.
  @return Array containing instance of Assets.
  */
 - (NSArray *)assetsForKey:(NSString *)key;
 
+//MARK: - Group
+/**---------------------------------------------------------------------------------------
+ * @name Get Single or Multiple Group/s
+ *  ---------------------------------------------------------------------------------------
+ */
 
-//MARK: - HTML String from Markdown -
+/**
+ Get the info of the specified key of Group object and returns instance of Group.
+ 
+     // 'details' is a key in people content type for group
+ 
+     //Obj-C
+     Group *detailsGroup = [entryObj groupForKey:@"details"];
+ 
+     //Swift
+     var detailsGroup:Group =  entryObj.groupForKey("details")
+ 
+ @param key Key containing the value of Group
+ @return Instance of Group
+ */
+-(nullable Group*)groupForKey:(NSString*)key;
+
+/**
+ Get the info of the specified key of content type  and returns array of Group.
+ 
+     // 'addresses' is a key in people for multiple group
+ 
+     //Obj-C
+     NSArray *groups = [entryObj groupsForKey:@"addresses"];
+ 
+     //Swift
+     var groups:NSArray =  entryObj.groupsForKey("addresses")
+ 
+ @param key Key containing the value of Group array
+ @return NSArray of Groups
+ */
+
+- (NSArray*)groupsForKey:(NSString*)key;
+
+//MARK: - HTML String from Markdown
 /**---------------------------------------------------------------------------------------
  * @name HTML String from Markdown
  *  ---------------------------------------------------------------------------------------
@@ -254,15 +292,13 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
  Converts Markdown to String of HTML String for specified key
  
-    //Assuming 'entryObj' is a Entry instance
+     //Assuming 'entryObj' is a Entry instance
  
-    //Obj-C
-    NSString *markdownString = [entryObj HTMLStringForMarkdownKey:@"markdownString"];
+     //Obj-C
+     NSString *markdownString = [entryObj HTMLStringForMarkdownKey:@"markdownString"];
  
- 
-    //Swift
-    var markdownString:NSString = entryObj.HTMLStringForMarkdownKey("markdownString")
- 
+     //Swift
+     var markdownString:NSString = entryObj.HTMLStringForMarkdownKey("markdownString")
  
  @param key is Markdown string parameter
  @return Markdown to HTML String
@@ -272,20 +308,20 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
  Converts Markdown to Array of HTML String for specified key
  
- //Assuming 'entryObj' is a Entry instance
+     //Assuming 'entryObj' is a Entry instance
  
-    //Obj-C
-    NSArray *markdownArray = [entry HTMLArrayForMarkdownKey:@"multiple_markdown"];
+     //Obj-C
+     NSArray *markdownArray = [entryObj HTMLArrayForMarkdownKey:@"multiple_markdown"];
  
-    //Swift
-    var markdownArray = entry.HTMLArrayForMarkdownKey("multiple_markdown")
+     //Swift
+     var markdownArray = entryObj.HTMLArrayForMarkdownKey("multiple_markdown")
  
  @param key is Multiple Markdown Parameter
  @return HTML Array from Markdown
  */
 - (BUILT_NULLABLE NSArray *)HTMLArrayForMarkdownKey:(NSString *)key;
 
-//MARK: - Only and Except -
+//MARK: - Only and Except
 /**---------------------------------------------------------------------------------------
  * @name Only and Except
  *  ---------------------------------------------------------------------------------------
@@ -313,13 +349,13 @@ Specifies an array of keys in reference class object that would be 'excluded' fr
      
      //Swift
      entryObj.includeAllFieldsExcept(["name"])
- 
+
  @discussion Specifies an array of keys in BASE object that would be 'excluded' from the response.
  @param fieldUIDs Array of keys to be excluded from the response.
  */
 - (void)includeAllFieldsExcept:(NSArray *)fieldUIDs;
 
-//MARK: - Reference -
+//MARK: - Reference
 /**---------------------------------------------------------------------------------------
  * @name Reference
  *  ---------------------------------------------------------------------------------------
@@ -369,7 +405,7 @@ Specifies an array of keys in reference class object that would be 'excluded' fr
  */
 - (void)includeRefFieldWithKey:(NSString *)key excludingRefValuesWithKeys:(NSArray *)values;
 
-//MARK: - Fetch -
+//MARK: - Fetch
 /**---------------------------------------------------------------------------------------
  * @name Fetch
  *  ---------------------------------------------------------------------------------------
@@ -401,7 +437,24 @@ Specifies an array of keys in reference class object that would be 'excluded' fr
  */
 - (void)fetch:(void(^)(ResponseType type, NSError *error))callback;
 
-//MARK: - Cancel Request -
+/**
+ Returns an array of Entries for the specified reference key
+ 
+ Use this method to retrieve entries when using includeRefFieldWithKey: method of Query. The reference field key may have an array of objects or a single object. This method will return the Entries for the included reference field.
+ 
+     //Obj-C
+     [entryObj entriesForKey:@"detail" withContentType:"description"];
+ 
+     //Swift
+     entryObj.entriesForKey("detail" withContentType:"description")
+ 
+ @param key      the reference field key
+ @param contentTypeName set the contentTypeName to which the object(s) belongs
+ @return An array of Entries for the specified key
+ */
+- (NSArray *)entriesForKey:(NSString *)referenceKey withContentType:(NSString *)contentTypeName;
+
+//MARK: - Cancel Request
 /**---------------------------------------------------------------------------------------
  * @name Cancel Request
  *  ---------------------------------------------------------------------------------------
@@ -420,7 +473,7 @@ Advises the operation object that it should stop executing its task.
  */
 - (void)cancelRequest;
 
-//MARK: - Subscripting -
+//MARK: - Subscripting
 - (BUILT_NULLABLE id)objectForKey:(NSString *)key;
 - (BUILT_NULLABLE id)objectForKeyedSubscript:(id <NSCopying>)key;
 

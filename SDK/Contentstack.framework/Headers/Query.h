@@ -135,38 +135,6 @@ This method provides all the entries for the specified language in the response.
  */
 - (void)tags:(NSArray*)tagsArray;
 
-//MARK: Before/After UID -
-/**---------------------------------------------------------------------------------------
- * @name Before/After UID
- *  ---------------------------------------------------------------------------------------
- */
-
-/**
- This method provides only the entries before the specified entry id.
- 
-     //Obj-C
-     [blogQuery beforeUID:@"blt1234567890abcdef"];
-     
-     //Swift
-     blogQuery.beforeUID("blt1234567890abcdef")
- 
- @param uid Uid of the field that is to be taken into consideration
- */
-- (void)beforeUID:(NSString *)uid;
-
-/**
-This method provides only the entries after the specified entry id.
-
-     //Obj-C
-     [blogQuery afterUID:@"blt1234567890abcdef"];
-     
-     //Swift
-     blogQuery.afterUID("blt1234567890abcdef")
- 
-@param uid Uid of the field that is to be taken into consideration
- */
-- (void)afterUID:(NSString *)uid;
-
 //MARK: Subqueryies with AND / OR -
 /**---------------------------------------------------------------------------------------
  * @name Subqueries with AND / OR

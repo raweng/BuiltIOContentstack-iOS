@@ -15,7 +15,8 @@
 #import <Contentstack/Query.h>
 #import <Contentstack/QueryResult.h>
 #import <ContentStack/Config.h>
-#import <Contentstack/Assets.h>
+#import <Contentstack/Asset.h>
 #import <Contentstack/AssetLibrary.h>
+#import <Contentstack/Group.h>
 
 #endif /* ContentstackIO_h */

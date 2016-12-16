@@ -12,7 +12,7 @@
 @class Config;
 @class ContentType;
 @class AssetLibrary;
-@class Assets;
+@class Asset;
 
 BUILT_ASSUME_NONNULL_BEGIN
 
@@ -110,53 +110,10 @@ BUILT_ASSUME_NONNULL_BEGIN
  */
 - (void)removeHeaderForKey:(NSString *)headerKey;
 
-/**----------------------------------------------------------------------------------------
- * @name Last Activity
- *-----------------------------------------------------------------------------------------
- */
 
-/**
- fetch last activity of content type
- 
-     //Obj-C
-      [stack fetchLastActivity:^(ResponseType responseType, NSDictionary *lastActivity, NSError *error) {
-        //lastActivity
-     }];
-     
-     //Swift
-     stack.fetchLastActivity { (responseType, lastActivity!, error!) -> Void in
-        //lastActivity
-     }
-
- 
- @param headers The headers as dictionary which needs to be added to the application
- */
-- (void)fetchLastActivity:(void (^)(ResponseType responseType, NSDictionary *lastActivity, NSError *error))completionBlock;
-
-/**----------------------------------------------------------------------------------------
- * @name Fetch Schema
- *-----------------------------------------------------------------------------------------
- */
-/**
- Gets the schema of content types
-  
- //Obj-C
- [stack fetchSchema:^(ResponseType responseType, NSArray *schema, NSError *error) {
- 
- }];
- 
- //Swift
- stack.fetchSchema { (responseType, schema, error) -> Void in
- 
- }
- 
- @param completionBlock Completion block with params (ResponseType responseType, NSArray *schema, NSError *error)
- */
-- (void)fetchSchema:(void (^)(ResponseType responseType, NSArray * BUILT_NULLABLE_P schema, NSError * BUILT_NULLABLE_P error))completionBlock;
-
-//MARK: Assets -
+//MARK: Asset and AssetLibrary -
 /**---------------------------------------------------------------------------------------
- * @name Assets
+ * @name Asset and AssetLibrary
  *  ---------------------------------------------------------------------------------------
  */
 
@@ -178,29 +135,29 @@ BUILT_ASSUME_NONNULL_BEGIN
  Represents a Asset on 'Stack' which can be executed to get Asset object
  
      //Obj-C
-     Assets *assetObj = [stack assets];
+     Asset *assetObj = [stack asset];
      
      //Swift
-     var assetObj:Assets = stack.assets()
+     var assetObj:Asset = stack.asset()
  
  @return Returns new Asset instance
  */
 
--(Assets*)asset;
+-(Asset*)asset;
 
 /**
  Gets the new instance of Asset object with specified UID.
  
      //Obj-C
-     Assets *assetObj = [contentTypeObj assetWithUID:@"bltf4fsamplec851db"];
+     Asset *assetObj = [contentTypeObj assetWithUID:@"bltf4fsamplec851db"];
      
      //Swift
-     var assetObj:Assets = contentTypeObj.assetWithUID("bltf4fsamplec851db")
+     var assetObj:Asset = contentTypeObj.assetWithUID("bltf4fsamplec851db")
  
  @param uid uid of the Asset object to fetch.
  @return new instance of Asset with uid.
  */
-- (Assets *)assetWithUID:(NSString *)uid;
+- (Asset *)assetWithUID:(NSString *)uid;
 
 
 @end

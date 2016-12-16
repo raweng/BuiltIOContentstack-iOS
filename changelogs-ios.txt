@@ -1,7 +1,44 @@
+Version: 3.1.0
+Date: Dec-16-2016
+
+New Features:
+
+	*Group
+		- Added New Class
+
+	*Entry
+		- added method 'groupForKey:'
+		- added method 'groupsForKey:'
+		- added method ‘entriesForKey:withContentType:'
+
+	*AssetLibrary
+		- added method ‘sortWithKey:orderBy:’
+		- added method ‘objectsCount’
+		- added method ‘includeCount’
+		- added method ‘includeRelativeUrls’
+		- added method ‘setHeader:forKey:’
+		- added method ‘addHeadersWithDictionary:’
+		- added method ‘removeHeaderForKey:’
+
+	*Asset
+		- added method ‘setHeader:forKey:’
+		- added method ‘addHeadersWithDictionary:’
+		- added method ‘removeHeaderForKey:’
+
+Modifications:
+
+	*Asset
+		- Class name modified from ‘Assets’ to ‘Asset’
+		- renamed property ’assetType’ to ‘fileType’ 
+	
+
+
+====================================================================================
 Version: 3.0.0
 Date: Oct-19-2016
 
 New Features:
+
 	*Config
 		- Added New Class
 
@@ -22,9 +59,11 @@ New Features:
 	 - added method 'asset'
 	 - added method 'assetWithUID:'
 	 - added method 'assetLibrary'
+	 - added method 'fetchLastActivity:'
 	 
 
 API deprecation:
+
 	*Contentstack
 	 - removed method 'stackWithAPIKey:accessToken:environmentUID:'
 
@@ -45,6 +84,7 @@ Version: 1.0.1
 Date: Sept-22-2016
 
 Bug Fixes:
+
 	*Entry
 	 - Fixed fetch method which now return response as per environment.
 

@@ -11,7 +11,7 @@
 
 @class Entry;
 @class Query;
-@class Assets;
+@class Asset;
 
 BUILT_ASSUME_NONNULL_BEGIN
 
@@ -28,11 +28,11 @@ BUILT_ASSUME_NONNULL_BEGIN
 /**
 Set a header for ContentType
  
-    //Obj-C
-    [contentTypeObj setHeader:@"MyValue" forKey:@"My-Custom-Header"];
+     //Obj-C
+     [contentTypeObj setHeader:@"MyValue" forKey:@"My-Custom-Header"];
 
-    //Swift
-    contentTypeObj.setHeader("MyValue", forKey: "My-Custom-Header")
+     //Swift
+     contentTypeObj.setHeader("MyValue", forKey: "My-Custom-Header")
 
 @param headerValue  The header key
 @param headerKey    The header value
