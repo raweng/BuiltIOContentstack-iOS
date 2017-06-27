@@ -47,6 +47,6 @@ import Contentstack
 
 ## License
 ```
-Copyright (c) 2016, Contentstack.io.
+Copyright (c) 2017, Contentstack.io.
 All rights reserved.
 ```
