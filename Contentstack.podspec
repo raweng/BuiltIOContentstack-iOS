@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
 s.name             = 'Contentstack'
-s.version          = '3.1.1'
-s.summary          = 'Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre.'
+s.version          = '3.2.0'
+s.summary          = 'Contentstack is a headless CMS with an API-first approach that puts content at the centre.'
 
 s.description      = <<-DESC
-Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content. 
+Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content. 
 
-In a world where content is consumed via countless channels and form factors across mobile, web and IoT, Built.io Contentstack reimagines content management by decoupling code from content. Business users manage content – no training or development required. Developers can create cross-platform apps and take advantage of a headless CMS that delivers content through APIs. With an architecture that’s extensible – but without the bloat of legacy CMS – Built.io Contentstack cuts down on infrastructure, maintenance, cost and complexity.
+In a world where content is consumed via countless channels and form factors across mobile, web and IoT, Contentstack reimagines content management by decoupling code from content. Business users manage content – no training or development required. Developers can create cross-platform apps and take advantage of a headless CMS that delivers content through APIs. With an architecture that’s extensible – but without the bloat of legacy CMS – Built.io Contentstack cuts down on infrastructure, maintenance, cost and complexity.
 DESC
 
 s.homepage         = 'https://www.built.io/products/contentstack/overview'

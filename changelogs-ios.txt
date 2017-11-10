@@ -1,3 +1,25 @@
+Version: 3.2.0
+Date: Nov-10-2017
+
+New Features:
+
+	*Stack
+		- added method ‘imageTransformWithUrl:andParams:’
+
+	*Query
+		- added method 'includeContentType:'
+
+	*QueryResult
+		- added property ‘content_type’
+
+
+API deprecation:
+
+	*Query
+	 - Deprecated property 'includeSchema'
+
+
+====================================================================================
 Version: 3.1.1
 Date: Jun-24-2017
 
